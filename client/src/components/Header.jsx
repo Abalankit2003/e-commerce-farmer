@@ -14,14 +14,16 @@ function Header({ title }) {
           className="border rounded-lg p-3 w-full"
           placeholder="Search..."
         />
-        <FaSearch className="absolute right-4"/>
+        <FaSearch className="absolute right-4" />
       </div>
 
       <ul className="flex gap-5 items-center">
         <Link to="/cart">
           <FaCartShopping />
         </Link>
-        <ol>Profile</ol>
+        <Link to="/profile">
+          <ol>Profile</ol>
+        </Link>
       </ul>
     </header>
   );

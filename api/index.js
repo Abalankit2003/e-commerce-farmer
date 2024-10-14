@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const cookieParse = require("cookie-parser");
 const farmerRouter = require("./routes/farmer.route.js");
+const shoppingRouter = require("./routes/shopping.route.js");
 
 const app = express();
 const PORT = 3000;
@@ -22,6 +23,7 @@ app.use(cookieParse());
 // base routes
 app.use("/api/auth", authRoute);
 app.use("/api/farmer", farmerRouter);
+app.use("/api/shopping", shoppingRouter);
 
 // error handler middleware
 app.use((error, req, res, next) => {
