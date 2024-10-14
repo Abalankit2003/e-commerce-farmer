@@ -8,6 +8,7 @@ import ProductListing from "./pages/ProductListing";
 import Shop from "./pages/Shop";
 import Header from "./components/Header";
 import Cart from "./pages/Cart";
+import Profile from "./pages/Profile";
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
               <Route path="/productlisting" element={< ProductListing />}></Route>
               <Route path="/shopping" element={<Shop />}></Route>
               <Route path="/cart" element={<Cart />}></Route>
+              <Route path="/profile" element={<Profile />}></Route>
             </Route>
           </Routes>
       </BrowserRouter>
