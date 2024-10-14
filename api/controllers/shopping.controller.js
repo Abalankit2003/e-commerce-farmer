@@ -22,4 +22,15 @@ const getAllProducts = async(req, res, next) => {
     }
 }
 
-module.exports = {addProductItems, getAllProducts};
+
+const getProductById = async(req, res, next) => {
+    const id = req.params.id;
+    try {
+        const data = await productModel.findById(id);
+        return res.json(data);
+    } catch (error) {
+        next(customError(500, 'Error in fetching the product'));
+    }
+}
+
+module.exports = { addProductItems, getAllProducts, getProductById };
