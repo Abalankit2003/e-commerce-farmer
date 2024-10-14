@@ -12,4 +12,14 @@ const addProductItems = async (req, res, next) => {
     }
 }
 
-module.exports = {addProductItems};
+
+const getAllProducts = async(req, res, next) => {
+    try {
+        const data = await productModel.find();
+        return res.json(data);
+    } catch (error) {
+        next(customError(400, 'Error while getting products'));
+    }
+}
+
+module.exports = {addProductItems, getAllProducts};
