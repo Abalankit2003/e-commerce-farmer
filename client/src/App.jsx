@@ -9,6 +9,7 @@ import Shop from "./pages/Shop";
 import Header from "./components/Header";
 import Cart from "./pages/Cart";
 import Profile from "./pages/Profile";
+import Product from "./pages/Product";
 
 function App() {
 
@@ -25,6 +26,7 @@ function App() {
               <Route path="/shopping" element={<Shop />}></Route>
               <Route path="/cart" element={<Cart />}></Route>
               <Route path="/profile" element={<Profile />}></Route>
+              <Route path="/product/:id" element={<Product />}></Route>
             </Route>
           </Routes>
       </BrowserRouter>
