@@ -17,6 +17,12 @@ const productSchema = new mongoose.Schema({
     }
 });
 
-const productModel = mongoose.model('productModel', productSchema);
+const cartSchema = new mongoose.Schema({
+    farmerId : {type : String, required : true},
+    cartItems : {type : Array}
+})
 
-module.exports = productModel;
+const productModel = mongoose.model('productModel', productSchema);
+const cartModel = mongoose.model('cartModel', cartSchema);
+
+module.exports = { productModel, cartModel };

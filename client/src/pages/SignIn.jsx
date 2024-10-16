@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { signInSuccess } from "../redux/user/userSlice";
 
@@ -86,23 +86,25 @@ export default function SignIn() {
           />
           <div className="flex gap-6 flex-wrap">
             <label className="flex items-center">
-              <input 
-              type="checkbox" 
-              id="farmer"
-              onChange={handleInputFieldChange}
-              checked={signInFormData.type === 'farmer'}
-              className="h-5 w-5" 
+              <input
+                type="checkbox"
+                id="farmer"
+                onChange={handleInputFieldChange}
+                checked={signInFormData.type === "farmer"}
+                className="h-5 w-5"
               />
-              <span className="ml-2 text-white font-semibold text-lg">Farmer</span>
+              <span className="ml-2 text-white font-semibold text-lg">
+                Farmer
+              </span>
             </label>
             <label className="flex items-center">
               <input
-               type="checkbox" 
-               id="retailer"
-               onChange={handleInputFieldChange}
-               checked={signInFormData.type === 'retailer'}
-               className="h-5 w-5" 
-               />
+                type="checkbox"
+                id="retailer"
+                onChange={handleInputFieldChange}
+                checked={signInFormData.type === "retailer"}
+                className="h-5 w-5"
+              />
               <span className="ml-2 text-white font-semibold text-lg">
                 Retailer/Company
               </span>
@@ -115,9 +117,15 @@ export default function SignIn() {
             Sign In
           </button>
         </form>
-        {
-          error && <p className="text-red-200 p-3 text-sm"><span className="text-white text-sm">Error : </span>{error}</p>
-        }
+        {error && (
+          <p className="text-red-200 p-3 text-sm">
+            <span className="text-white text-sm">Error : </span>
+            {error}
+          </p>
+        )}
+        <p className="text-white font-semibold text-sm mt-3 text-center">
+          Don't have an account. <Link to="/sign-up" className="hover:text-blue-600 hover:underline text-green-400">Register here</Link>
+        </p>
       </div>
     </div>
   );

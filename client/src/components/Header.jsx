@@ -2,9 +2,12 @@ import React from "react";
 import { FaCartShopping } from "react-icons/fa6";
 import {FaSearch} from "react-icons/fa"
 import {Link} from 'react-router-dom';
+import { useSelector } from "react-redux";
 
 
-function Header({ title }) {
+function Header({ title = "AnkitRaj" }) {
+
+  const { currentUser } = useSelector(state => state.user);
   return (
     <header className="flex justify-between items-center p-4 bg-[#4CAF50]">
       <strong>{title}</strong>
@@ -22,7 +25,7 @@ function Header({ title }) {
           <FaCartShopping />
         </Link>
         <Link to="/profile">
-          <ol>Profile</ol>
+          {currentUser ? <ol>{currentUser}</ol> : <ol>Profile</ol>}
         </Link>
       </ul>
     </header>
