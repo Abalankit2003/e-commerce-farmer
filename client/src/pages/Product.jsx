@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
+import Slider from '../components/Slider';
 
 function Product() {
 
@@ -14,15 +15,8 @@ function Product() {
         })();
     }, []);
 
-    console.log(value);
-  return (
-    <div>
-      {value && (
-        
-        <img src={value.product} alt="" />
-      )}
-    </div>
-  )
+    // console.log(value);
+  return <div>{value && <Slider images={value.productImages} />}</div>;
 }
 
 export default Product
