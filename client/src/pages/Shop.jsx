@@ -19,12 +19,18 @@ function Shop() {
       setAllProducts(data);
     })();
   }, []);
-  }
+
+
+  console.log(allProducts)
+
+  
 
   return (
     <div className="flex flex-col gap-1 bg-gray-200">
       <Header title="Shopping" />
-      <Slider props={allProducts.slice(0, 5)} />
+      {allProducts.length > 0 && (
+        <Slider images={allProducts.slice(0,5).map(element => element.productImages).flat()} />
+      )}
       <div className="p-3 flex flex-row flex-wrap gap-5">
         {allProducts &&
           allProducts.map((product) => (
