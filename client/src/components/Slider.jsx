@@ -22,11 +22,11 @@ function Slider({images}) {
 
   return (
     arraySize && (
-      <div className="relative flex items-center justify-center box-border h-[320px]">
+      <div className="relative flex items-center justify-center box-border">
         <img
           src={images[index]}
           alt={images[index]}
-          className="flex-1 h-full object-fill"
+          className="flex-1 w-[720px] h-[380px] object-cover"
         />
         <FaArrowLeft
           onClick={handleLeftArrow}
