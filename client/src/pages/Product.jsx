@@ -11,13 +11,36 @@ function Product() {
 
     useEffect(() => {
         (async () => {
-            const data = await fetch(`/api/shopping/${id}`);
+            const data = await fetch(`/api/shopping/product/${id}`);
             const res = await data.json();
             setValue(res);
         })();
     }, []);
 
-    console.log(value);
+    const handleCart = async(e) => {
+        e.preventDefault();
+
+        try {
+            
+            const res = await fetch("/api/shopping/addToCart", {
+              method: "POST",
+              headers: {
+                "content-type": "application/json",
+              },
+              body: JSON.stringify({
+                item: id,
+              }),
+            });
+
+            const data = await res.json();
+            console.log(data);
+
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
+
+    // console.log(value);
   return (
     <div className='bg-slate-300 h-screen'>
       <Header />
@@ -30,7 +53,7 @@ function Product() {
           <span className='text-green-700 text-3xl'>{value.productPrice}</span>
         </span>
         <span className="flex items-center justify-evenly w-2/4">
-          <button className="border bg-green-700 p-3 rounded-lg w-1/5 text-white">
+          <button className="border bg-green-700 p-3 rounded-lg w-1/5 text-white" onClick={handleCart}>
             Add to Cart
           </button>
           <button className="border bg-green-700 p-3 rounded-lg w-1/5 text-white">

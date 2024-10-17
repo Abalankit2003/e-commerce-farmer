@@ -1,5 +1,6 @@
 const customError = require("../util/customError");
 const { productModel, cartModel } = require("../models/shopping.model.js");
+const { findOne } = require("../models/auth.model.js");
 
 const addProductItems = async (req, res, next) => {
   const body = req.body;
@@ -32,24 +33,50 @@ const getProductById = async (req, res, next) => {
 };
 
 const addToCart = async (req, res, next) => {
+  const farmerId = req.user;
+  const { item } = req.body;
 
-    const farmerId = req.user;
-    const {item} = req.body;
+  console.log(item);
 
-    try {
-        const user = await cartModel.findOne({farmerId});
-        if(!user) {
-            const data = await cartModel.create({ farmerId, cartItems : item });
-            return res.json(data);
-        }
-
-        const data = await cartModel.findOneAndUpdate({farmerId}, { $push : {cartItems : item}}, {new : true});
-        return res.json(data);
-
-        // return res.send("hello" + user);
-    } catch (error) {
-        next(customError(400, error.message));
+  try {
+    const user = await cartModel.findOne({ farmerId });
+    if (!user) {
+      const data = await cartModel.create({ farmerId, cartItems: item });
+      return res.json(data);
     }
+
+    const data = await cartModel.findOneAndUpdate(
+      { farmerId },
+      { $push: { cartItems: item } },
+      { new: true }
+    );
+    return res.json(data);
+
+    // return res.send("hello" + user);
+  } catch (error) {
+    next(customError(400, error.message));
+  }
 };
 
-module.exports = { addProductItems, getAllProducts, getProductById, addToCart };
+const getCartItems = async (req, res, next) => {
+  const farmerId = req.user;
+  console.log(farmerId);
+  try {
+
+      const data = await cartModel.findOne({farmerId});
+      if(!data) return next(customError(400, "Don't have any item in cart"));
+
+      res.status(200).json(data.cartItems);
+
+  } catch (error) {
+    next(customError(400, 'Ha ji'));
+  }
+};
+
+module.exports = {
+  addProductItems,
+  getAllProducts,
+  getProductById,
+  addToCart,
+  getCartItems,
+};
