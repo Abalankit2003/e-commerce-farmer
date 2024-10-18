@@ -3,6 +3,7 @@ import {FaArrowLeft, FaArrowRight} from 'react-icons/fa6';
 import Header from '../components/Header';
 import Card from '../components/Card';
 import Slider from '../components/Slider';
+import Footer from '../components/Footer';
 
 function Shop() {
 
@@ -45,6 +46,7 @@ function Shop() {
             />
           ))}
       </div>
+      <Footer />
     </div>
   );
 }
