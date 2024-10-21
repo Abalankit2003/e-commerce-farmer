@@ -60,16 +60,23 @@ const addToCart = async (req, res, next) => {
 
 const getCartItems = async (req, res, next) => {
   const farmerId = req.user;
-  console.log(farmerId);
+  // console.log(farmerId);
   try {
 
       const data = await cartModel.findOne({farmerId});
       if(!data) return next(customError(400, "Don't have any item in cart"));
 
-      res.status(200).json(data.cartItems);
+      const ids = data.cartItems;
+
+      const AllDetailsOfCartItems = await productModel.find({_id : {$in : ids}});
+
+      // console.log(data);
+      // console.log(AllDetailsOfCartItems);
+
+      res.status(200).json(AllDetailsOfCartItems);
 
   } catch (error) {
-    next(customError(400, 'Ha ji'));
+    next(customError(400, error.message));
   }
 };
 
