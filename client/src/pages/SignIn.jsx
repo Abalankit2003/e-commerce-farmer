@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { signInSuccess } from "../redux/user/userSlice";
+import { signInSuccess, getCartItems } from "../redux/user/userSlice";
 
 export default function SignIn() {
 
@@ -53,6 +53,15 @@ export default function SignIn() {
       }
 
       dispatch(signInSuccess(data));
+
+      const cartItems = await fetch("/api/shopping/getCartItems");
+
+      const body = await cartItems.json();
+      if(body.success === false) {} 
+      else {
+        dispatch(getCartItems(body.length));
+        console.log("Total items " + body.length);
+      }
       console.log(data);
       navigate("/");
     } catch (error) {

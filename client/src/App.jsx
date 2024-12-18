@@ -10,6 +10,8 @@ import Header from "./components/Header";
 import Cart from "./pages/Cart";
 import Profile from "./pages/Profile";
 import Product from "./pages/Product";
+import Agreement from "./pages/Agreement";
+import RetailerRoute from "./components/RetailerRoute";
 
 function App() {
 
@@ -27,6 +29,9 @@ function App() {
               <Route path="/cart" element={<Cart />}></Route>
               <Route path="/profile" element={<Profile />}></Route>
               <Route path="/product/:id" element={<Product />}></Route>
+            </Route>
+            <Route element={<RetailerRoute />}>
+                <Route path='/agreement' element= {<Agreement />} ></Route>
             </Route>
           </Routes>
       </BrowserRouter>

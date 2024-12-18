@@ -30,11 +30,11 @@ function Slider({images}) {
         />
         <FaArrowLeft
           onClick={handleLeftArrow}
-          className="absolute left-4 text-slate-700 text-3xl cursor-pointer"
+          className="absolute left-4 text-slate-700 text-3xl cursor-pointer hover:text-white"
         />
         <FaArrowRight
           onClick={handleRightArrow}
-          className="absolute right-4 text-slate-700 text-3xl cursor-pointer"
+          className="absolute right-4 text-slate-700 text-3xl cursor-pointer hover:text-white"
         />
       </div>
     )

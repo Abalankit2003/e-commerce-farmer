@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 
 function Header({ title = "AnkitRaj" }) {
 
-  const { currentUser } = useSelector(state => state.user);
+  const { currentUser, cartItems } = useSelector(state => state.user);
   return (
     <header className="flex justify-between items-center p-4 bg-[#4CAF50]">
       <strong>{title}</strong>
@@ -21,11 +21,12 @@ function Header({ title = "AnkitRaj" }) {
       </div>
 
       <ul className="flex gap-5 items-center">
-        <Link to="/cart">
+        <Link to="/cart" className="relative">
           <FaCartShopping />
+          <span className="absolute right-[-12px] top-[-20px] w-5 text-center text-white border-opacity-15 bg-neutral-800 rounded-[50%]">{cartItems}</span>
         </Link>
         <Link to="/profile">
-          {currentUser ? <ol>{currentUser}</ol> : <ol>Profile</ol>}
+          {currentUser ? <ol>{currentUser.email}</ol> : <ol>Profile</ol>}
         </Link>
       </ul>
     </header>

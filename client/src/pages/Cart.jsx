@@ -11,11 +11,17 @@ function Cart() {
   useEffect(() => {
     (async () => {
       const res = await fetch("/api/shopping/getCartItems");
-
       const data = await res.json();
+      // console.log(data);
+      if(data.success == false) {
+        console.log("oops nothing found");
+        return;
+      }
       setCartItems(data);
     })();
   }, []);
+
+  console.log(cartItems)
 
 
   return (
@@ -24,7 +30,7 @@ function Cart() {
       <div className="flex flex-col p-3 items-center">
         {cartItems &&
           cartItems.map((item) => (
-            <div className="flex justify-start gap-3 w-2/12 my-1 border-2 p-2 bg-white rounded-lg">
+            <div className="flex justify-start gap-3 w-2/12 my-1 border-2 p-2 bg-white rounded-lg" key={item._id}>
               <img
                 src={item.productImages[0]}
                 alt={item.productName}
@@ -38,7 +44,6 @@ function Cart() {
                   <PiCurrencyInrDuotone className='text-[20px]' />
                   {item.productPrice}
                 </span>
-                
               </div>
             </div>
           ))}

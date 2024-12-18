@@ -1,13 +1,20 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { PiCurrencyInrBold } from "react-icons/pi";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Slider from '../components/Slider';
 import Header from '../components/Header';
+import { getCartItems } from '../redux/user/userSlice';
 
 function Product() {
 
     const [value, setValue] = useState(null);
     const {id} = useParams();
+
+    const dispatch = useDispatch();
+    const { cartItems } = useSelector(state => state.user);
 
     useEffect(() => {
         (async () => {
@@ -21,7 +28,6 @@ function Product() {
         e.preventDefault();
 
         try {
-            
             const res = await fetch("/api/shopping/addToCart", {
               method: "POST",
               headers: {
@@ -34,7 +40,8 @@ function Product() {
 
             const data = await res.json();
             console.log(data);
-
+            // toast("Item added to cart");
+            dispatch(getCartItems(cartItems + 1));
         } catch (error) {
             console.log(error.message);
         }
@@ -56,6 +63,7 @@ function Product() {
           <button className="border bg-green-700 p-3 rounded-lg w-1/5 text-white" onClick={handleCart}>
             Add to Cart
           </button>
+          <ToastContainer />
           <button className="border bg-green-700 p-3 rounded-lg w-1/5 text-white">
             Buy now
           </button>

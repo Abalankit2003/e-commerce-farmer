@@ -23,7 +23,7 @@ class authService {
                 process.env.JWT_SECRET_KEY,
             )
             res.cookie('accessToken', token, {httpOnly: true, maxAge : 60 * 60 * 1000});
-            return res.status(200).json(email);
+            return res.status(200).json({email, type});
         } catch (error) {
             next(error);
         }

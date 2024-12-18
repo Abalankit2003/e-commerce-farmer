@@ -37,3 +37,6 @@ coverage/
 
 # Git-related
 .git/
+
+#text file
+flowChart.txt
